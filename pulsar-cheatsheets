@@ -1,0 +1,7 @@
+~/apache-pulsar-2.7.0/bin/pulsar-managed-ledger-admin print-managed-ledger --managedLedgerPath /public/default/persistent/DEtopic --zkServer localhost:2181
+tmux ls 
+tmux attach -t <session-name>
+ctrl+b+d 
+
+
+
