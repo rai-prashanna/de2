@@ -5,3 +5,12 @@ ctrl+b+d
 
 
 
+./pulsar-managed-ledger-admin print-managed-ledger --managedLedgerPath /public/default/persistent/C1-Topic --zkServer localhost:2181
+pulsar-admin tenants list
+
+./pulsar-admin namespaces list sample
+./pulsar-admin topics list public/default
+
+./pulsar-admin topics delete "persistent://public/default/C1-Topic" --force
+
+./pulsar-admin topics peek-messages --count 10 --subscription C1-sub persistent://public/default/C1-Topic
