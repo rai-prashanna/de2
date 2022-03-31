@@ -1,0 +1,43 @@
+#cloud-config
+apt_update: true
+package_upgrade: true
+apt_reboot_if_required: true
+apt_sources:
+  - source: "ppa:nginx/stable"
+packages:
+  - htop
+  - nmap
+  - git
+  - curl
+  - wget
+  - tcpdump
+  - python3-pip
+  - python-is-python3
+  - python-dev
+  - build-essential
+  - docker-ce 
+  - docker-ce-cli 
+  - containerd.io
+timezone: "Europe/Stockholm"
+bootcmd:
+  - echo bootcmd started at $(date)
+  - echo $INSTANCE_ID > /etc/instance_id
+groups:
+  - infosec: [ubuntu]
+users:
+  - name: ubuntu
+    groups: sudo
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDJu2T+SI/P2Aod5a8WNV1GLUQbhVhNKahiJxJ1+n0y8DPOyPQBcMNK31xkoCAUUx3IKZKqWIGraWVC/z3NqJPQb1YrmXtcXB37JioVPolr+yTh/aA4ka+YpdpBA9WlTjOXuqqT68kg/Dn9mhqylmIe9+WSsGjxzpsSqDaXsXPViUFVzIyW3cuG+DFie2E8E6NBiPUW8VSWxSU3h8ywIhMZMx0Sdr2cMqs6UY9WSlWRhXQkqHJRGSP9ZZX300c27s8f4UakJxMa1MZAHEvqEyuXuTPJa36KdIBolG0PBIUTXiGYQ3VUzSYC1ueRpDvQEQSf+uO12snCv9t0evwiIEC9PUcVcOwLMRM+fixMromgylTurvO2A2VMLZWccltykjLtv7FEqFx9T70wJzbVNPpGHxdvDJ9uz+DgCBwcSTjza1Mv4XmRM2rjhuCd8KTOcHwti7/rrGgSbPp7hw6u9p6DSdQ35Pz6C7wBU/Fgb0oM5SL8QVWXO95myEPDhlJzbfE= oem@prai
+runcmd:
+  # install docker following the guide: https://docs.docker.com/install/linux/docker-ce/ubuntu/
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - sudo apt-get -y update
+  - sudo apt-get -y install docker-ce docker-ce-cli containerd.io
+  - sudo systemctl enable docker
+  # install docker-compose following the guide: https://docs.docker.com/compose/install/
+  - sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  - sudo chmod +x /usr/local/bin/docker-compose
