@@ -6,16 +6,16 @@ consumer = client.subscribe('C1-Topic', subscription_name='C1-sub')
 # Display message received from producer
 msg = consumer.receive()
 decoded_msg=msg.data().decode()
+consumer.acknowledge(msg)
 #decoded_msg=("number_of_words",number_of_words)
 index=int(decoded_msg)
-try:
-    while index>0:
-        msg=consumer.receive()
-        index=index-1;
-        print('%s' % msg.data().decode().upper())
-        # Acknowledge for receiving the message
-        consumer.acknowledge(msg)
-except:
-    consumer.negative_acknowledge(msg)
+messages_list=[]
+while index>0:
+    msg=consumer.receive()
+    index=index-1;
+    messages_list.append(msg.data().decode().upper())
+    consumer.acknowledge(msg)
+
+print('%s' % " ".join(messages_list))
 # Destroy pulsar client
 client.close()
