@@ -6,15 +6,14 @@ import time
 """
 
 # Fill in your author information
-___author___ = ""
-___email____ = ""
+___author___ = "Prashanna Rai"
+___email____ = "prai931024@gmail.com"
 
 # Input string
 INPUT_STRING = "I want to be capatilized"
 
 # Iteration represents the operation applied to each word in the string 
 # e.g., 1 represents that operation is applied to first word in the string
-ITERATION = 5
 
 def conversion(substring, operation):
     """A conversion function which takes a string as an input and outputs a converted string
@@ -32,9 +31,8 @@ def conversion(substring, operation):
     return function(substring)
 
 
-
-def function(string):
-    """ A function that performs some operation on a string. You can change the operation accordingly
+def splitter(string):
+    """ A function that performs split operation on a string. You can change the operation accordingly
 
     Args:
         string (String): input string on which some operation is applied
@@ -42,7 +40,25 @@ def function(string):
     Returns:
         [String]: string in upper case
     """
-    return string.upper()
+    splitted_sentence=string.split(" ")
+    result={}
+    index=0;
+    for word in splitted_sentence:
+        result.add((index,word))
+        index=index+1;
+    return result
+
+def merger(string):
+    """ A function that performs merge operation on a string. You can change the operation accordingly
+
+    Args:
+        string (String): input string on which some operation is applied
+
+    Returns:
+        [String]: string in upper case
+    """
+    merged=""
+    return string.split(" ")
 
 
 
@@ -64,11 +80,11 @@ if __name__ == "__main__":
     split_string = INPUT_STRING.split(" ")
 
 
-    for i in range(0,ITERATION):
+    # for i in range(0,ITERATION):
 
-        upper_case_string = conversion(split_string[i], function)
+    #     upper_case_string = conversion(split_string[i], function)
         
-        resultant_string +=   upper_case_string  + ' '    
+    #     resultant_string +=   upper_case_string  + ' '    
 
 
     print ("Resultant String: {}".format(resultant_string))
