@@ -1,28 +1,18 @@
 #cloud-config
-apt_update: true
 package_upgrade: true
-apt_reboot_if_required: true
-apt_sources:
-  - source: "ppa:nginx/stable"
+package_update: true
 packages:
+  - docker.io
   - htop
-  - nmap
   - git
-  - curl
-  - wget
-  - tcpdump
   - python3-pip
   - python-is-python3
-  - python-dev
-  - build-essential
-  - docker.io
-  - docker-ce
-  - docker-ce-cli
-  - containerd.io
 timezone: "Europe/Stockholm"
 bootcmd:
   - echo bootcmd started at $(date)
   - echo $INSTANCE_ID > /etc/instance_id
+  - apt-get install -y zsh
+  - apt-get install -y docker.io
 groups:
   - infosec: [ubuntu]
 users:
@@ -32,13 +22,11 @@ users:
     sudo: ["ALL=(ALL) NOPASSWD:ALL"]
     ssh-authorized-keys:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDJu2T+SI/P2Aod5a8WNV1GLUQbhVhNKahiJxJ1+n0y8DPOyPQBcMNK31xkoCAUUx3IKZKqWIGraWVC/z3NqJPQb1YrmXtcXB37JioVPolr+yTh/aA4ka+YpdpBA9WlTjOXuqqT68kg/Dn9mhqylmIe9+WSsGjxzpsSqDaXsXPViUFVzIyW3cuG+DFie2E8E6NBiPUW8VSWxSU3h8ywIhMZMx0Sdr2cMqs6UY9WSlWRhXQkqHJRGSP9ZZX300c27s8f4UakJxMa1MZAHEvqEyuXuTPJa36KdIBolG0PBIUTXiGYQ3VUzSYC1ueRpDvQEQSf+uO12snCv9t0evwiIEC9PUcVcOwLMRM+fixMromgylTurvO2A2VMLZWccltykjLtv7FEqFx9T70wJzbVNPpGHxdvDJ9uz+DgCBwcSTjza1Mv4XmRM2rjhuCd8KTOcHwti7/rrGgSbPp7hw6u9p6DSdQ35Pz6C7wBU/Fgb0oM5SL8QVWXO95myEPDhlJzbfE= oem@prai
+fqdn: myhostname
 runcmd:
-  - apt-get install -y zsh
-  - runuser -l ubuntu -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/coreycole/oh-my-zsh/master/tools/install.sh)"' 
+  #- runuser -l ubuntu -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/coreycole/oh-my-zsh/master/tools/install.sh)"' 
   - chsh -s $(which zsh) ubuntu
   # change the prompt to include the server hostname
-  - su ubuntu -c echo "echo export PROMPT=\''%{$fg[green]%}%n@%{$fg[green]%}%m%{$reset_color%} ${ret_status} %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'\'" >> /home/ubuntu/.zshrc
+  #- su ubuntu -c echo "echo export PROMPT=\''%{$fg[green]%}%n@%{$fg[green]%}%m%{$reset_color%} ${ret_status} %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'\'" >> /home/ubuntu/.zshrc
   # get environment variables defined above
   - echo "source ~/.profile" >> /home/ubuntu/.zshrc
-
-
