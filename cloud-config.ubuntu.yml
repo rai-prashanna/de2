@@ -57,3 +57,16 @@ runcmd:
   - su ubuntu -c echo "echo export PROMPT=\''%{$fg[green]%}%n@%{$fg[green]%}%m%{$reset_color%} ${ret_status} %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'\'" >> /home/ubuntu/.zshrc
 # get environment variables defined above
   - echo "source ~/.profile" >> /home/ubuntu/.zshrc
+
+
+
+  - apt-get install -y zsh
+  - runuser -l ubuntu -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/coreycole/oh-my-zsh/master/tools/install.sh)"' 
+  - chsh -s $(which zsh) ubuntu
+  - fgGreen='%{$fg[green]%}'
+  - fgCyan='%{$fg[cyan]%}'
+  - fgReset='%{$reset_color%}'
+  - retStatus='${ret_status}'
+  - gitInfo='$(git_prompt_info)'
+  - runuser -l ubuntu -c "echo export PROMPT=\''${fgGreen}%n@%m${fgReset} ${retStatus} ${fgCyan}%c${fgReset} ${gitInfo}'\'" >> /home/ubuntu/.zshrc
+  - echo "source ~/.profile" >> /home/ubuntu/.zshrc
