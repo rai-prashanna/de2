@@ -1,0 +1,2 @@
+time_this_iter_s,done,timesteps_total,episodes_total,training_iteration,trial_id,experiment_id,date,timestamp,time_total_s,pid,hostname,node_ip,time_since_restore,timesteps_since_restore,iterations_since_restore,warmup_time,xval/fit_time,xval/score_time,xval/test_score
+0.3386843204498291,False,,,1,b0909_00002,b83fa43c3ff3400892f78e5029eb8176,2022-04-29_00-03-16,1651190596,0.3386843204498291,45314,ben-ray-small,192.168.2.213,0.3386843204498291,0,1,0.07391881942749023,[0.1359539  0.03654289 0.04477549 0.02217293 0.01885438],[0. 0. 0. 0. 0.],[nan nan nan nan nan]

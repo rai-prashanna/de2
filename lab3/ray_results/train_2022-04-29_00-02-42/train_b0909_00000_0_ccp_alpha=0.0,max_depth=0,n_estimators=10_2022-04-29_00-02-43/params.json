@@ -1,0 +1,5 @@
+{
+  "ccp_alpha": 0.0,
+  "max_depth": 0,
+  "n_estimators": 10
+}
