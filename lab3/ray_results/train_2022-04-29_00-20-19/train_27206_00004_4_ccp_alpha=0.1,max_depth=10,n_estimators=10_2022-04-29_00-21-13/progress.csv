@@ -1,0 +1,2 @@
+mean_accuracy,time_this_iter_s,done,timesteps_total,episodes_total,training_iteration,trial_id,experiment_id,date,timestamp,time_total_s,pid,hostname,node_ip,time_since_restore,timesteps_since_restore,iterations_since_restore,warmup_time
+0.2855820105820106,4.933159112930298,False,,,1,27206_00004,373f244c435e4bb29c29278a8cf7e001,2022-04-29_00-21-28,1651191688,4.933159112930298,54962,ben-ray-small,192.168.2.213,4.933159112930298,0,1,0.2796506881713867
